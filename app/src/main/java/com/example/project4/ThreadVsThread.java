@@ -105,16 +105,16 @@ public class ThreadVsThread extends AppCompatActivity {
         img95.setImageResource(R.drawable.unfilled);img96.setImageResource(R.drawable.unfilled);img97.setImageResource(R.drawable.unfilled);
         img98.setImageResource(R.drawable.unfilled);img99.setImageResource(R.drawable.unfilled);
 
-        final ImageView images[] = {img0,  img1,  img2,  img3,  img4,  img5,  img6,  img7,  img8, img9, img10,
-                              img11, img12, img13, img14, img15, img16, img17, img18, img19,
-                              img21, img22, img23, img24, img25, img26, img27, img28, img29,
-                              img31, img32, img33, img34, img35, img36, img37, img38, img39,
-                              img41, img42, img43, img44, img45, img46, img47, img48, img49,
-                              img51, img52, img53, img54, img55, img56, img57, img58, img59,
-                              img61, img62, img63, img64, img65, img66, img67, img68, img69,
-                              img71, img72, img73, img74, img75, img76, img77, img78, img79,
-                              img81, img82, img83, img84, img85, img86, img87, img88, img89,
-                              img91, img92, img93, img94, img95, img96, img97, img98, img99,};
+        final ImageView images[] = {img0,  img1,  img2,  img3,  img4,  img5,  img6,  img7,  img8, img9,  img10,
+                                          img11, img12, img13, img14, img15, img16, img17, img18, img19, img20,
+                                          img21, img22, img23, img24, img25, img26, img27, img28, img29, img30,
+                                          img31, img32, img33, img34, img35, img36, img37, img38, img39, img40,
+                                          img41, img42, img43, img44, img45, img46, img47, img48, img49, img50,
+                                          img51, img52, img53, img54, img55, img56, img57, img58, img59, img60,
+                                          img61, img62, img63, img64, img65, img66, img67, img68, img69, img70,
+                                          img71, img72, img73, img74, img75, img76, img77, img78, img79, img80,
+                                          img81, img82, img83, img84, img85, img86, img87, img88, img89, img90,
+                                          img91, img92, img93, img94, img95, img96, img97, img98, img99};
 
 
 
@@ -206,7 +206,7 @@ public class ThreadVsThread extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg)
             {
-                super.handleMessage(msg);
+                //super.handleMessage(msg);
                 //Winner check
                 if (msg.obj == "W1" || msg.obj == "W2")
                 {
@@ -282,6 +282,7 @@ public class ThreadVsThread extends AppCompatActivity {
             //                Handler h1 = new Handler(l1);
             //                Handler h2 = new Handler(l2);
 
+            Looper l1 = worker1.getLooper();
                 //First thread runs a linear search
                 worker1.execute(new Runnable() {
                     @Override
@@ -295,6 +296,9 @@ public class ThreadVsThread extends AppCompatActivity {
                             handler.sendMessage(msg);
                         }
                         else {
+
+                            guesses.add(guess1);
+
                             if (guess1 == solution) {
                                 Message msg = new Message();
                                 msg.obj = "W1";
@@ -323,6 +327,7 @@ public class ThreadVsThread extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
+
                     }
                 });
 
@@ -342,7 +347,12 @@ public class ThreadVsThread extends AppCompatActivity {
                             Message msg = new Message();
                             msg.obj = "2D";
                             handler.sendMessage(msg);
-                        } else {
+                        }
+                        else
+                        {
+
+                            guesses.add(guess2);
+
                             if (guess2 == solution) {
                                 Message msg = new Message();
                                 msg.obj = "W2";

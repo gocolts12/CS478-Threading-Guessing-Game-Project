@@ -145,16 +145,16 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3861" />
+          <entry key="java" value="4024" />
           <entry key="txt" value="118" />
-          <entry key="xml" value="441" />
+          <entry key="xml" value="442" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3861" />
+          <entry key="JAVA" value="4024" />
           <entry key="PLAIN_TEXT" value="118" />
-          <entry key="XML" value="441" />
+          <entry key="XML" value="442" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -196,14 +196,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/project4/ThreadVsThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3380">
-              <caret line="284" column="51" lean-forward="true" selection-start-line="284" selection-start-column="51" selection-end-line="284" selection-end-column="51" />
+            <state relative-caret-position="640">
+              <caret line="354" lean-forward="true" selection-start-line="354" selection-end-line="354" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#11552#11621#0" />
                 <element signature="e#16794#21937#0" expanded="true" />
-                <element signature="e#17446#19399#0" expanded="true" />
-                <element signature="e#19398#19399#0" expanded="true" />
+                <element signature="e#17655#19706#0" expanded="true" />
+                <element signature="e#19705#19706#0" expanded="true" />
                 <element signature="e#19486#21514#0" expanded="true" />
                 <element signature="e#21513#21514#0" expanded="true" />
                 <element signature="e#21936#21937#0" expanded="true" />
@@ -216,7 +216,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/project4/Worker.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="460">
-              <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+              <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#452#453#0" expanded="true" />
@@ -229,8 +229,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_thread_vs_thread.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="46" column="22" lean-forward="true" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
+            <state relative-caret-position="220">
+              <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
@@ -254,13 +254,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/project4/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/project4/MyTable.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_thread_vs_thread.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/project4/Worker.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_thread_vs_thread.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/project4/ThreadVsThread.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="y" value="23" />
     <option name="width" value="1920" />
     <option name="height" value="1013" />
@@ -299,7 +299,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="D:/SDK" />
-    <property name="device.picker.selection" value="Pixel_2_XL_API_28_2" />
+    <property name="device.picker.selection" value="712KPGS1184527" />
     <property name="last_opened_file_path" value="$USER_HOME$/Google Drive/School/Senior/Spring/Android/Class App Examples/ThreadingWithHandlers/ThreadingWithHandlers" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
@@ -420,11 +420,11 @@
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49811035" weight="0.32871535" />
       <window_info anchor="bottom" id="Find" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.49761525" weight="0.20499243" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5071542" side_tool="true" visible="true" weight="0.32829046" />
-      <window_info active="true" anchor="bottom" id="Build" order="6" sideWeight="0.49284577" visible="true" weight="0.32829046" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50397456" side_tool="true" visible="true" weight="0.22541603" />
+      <window_info anchor="bottom" id="Build" order="6" sideWeight="0.49284577" weight="0.32829046" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Run" order="8" />
-      <window_info anchor="bottom" id="Debug" order="9" sideWeight="0.4964229" weight="0.22541603" />
+      <window_info active="true" anchor="bottom" id="Debug" order="9" sideWeight="0.49602544" visible="true" weight="0.22541603" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -483,7 +483,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/project4/Worker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
-          <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+          <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#452#453#0" expanded="true" />
@@ -494,22 +494,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_thread_vs_thread.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="46" column="22" lean-forward="true" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
+        <state relative-caret-position="220">
+          <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/project4/ThreadVsThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3380">
-          <caret line="284" column="51" lean-forward="true" selection-start-line="284" selection-start-column="51" selection-end-line="284" selection-end-column="51" />
+        <state relative-caret-position="640">
+          <caret line="354" lean-forward="true" selection-start-line="354" selection-end-line="354" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#11552#11621#0" />
             <element signature="e#16794#21937#0" expanded="true" />
-            <element signature="e#17446#19399#0" expanded="true" />
-            <element signature="e#19398#19399#0" expanded="true" />
+            <element signature="e#17655#19706#0" expanded="true" />
+            <element signature="e#19705#19706#0" expanded="true" />
             <element signature="e#19486#21514#0" expanded="true" />
             <element signature="e#21513#21514#0" expanded="true" />
             <element signature="e#21936#21937#0" expanded="true" />

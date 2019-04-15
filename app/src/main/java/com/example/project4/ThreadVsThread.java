@@ -21,8 +21,8 @@ import java.util.Random;
 
 public class ThreadVsThread extends AppCompatActivity {
 
-    private Worker worker1 = new Worker();
-    private Worker worker2 = new Worker();
+    private HandlerThread worker1 = new HandlerThread("Thread1");
+    private HandlerThread worker2 = new HandlerThread("Thread2");
     private int guess1;
     private int guess2 = 0;
     private int solution;
@@ -201,90 +201,221 @@ public class ThreadVsThread extends AppCompatActivity {
 //
 //        }
 
-        final Handler handler = new Handler(Looper.getMainLooper())
+        worker1.start();
+        worker2.start();
+        Looper l1 = worker1.getLooper();
+        Looper l2 = worker2.getLooper();
+
+        final Handler mainHandler = new Handler(getMainLooper());
+
+        final Handler h1 = new Handler(l1)
         {
             @Override
             public void handleMessage(Message msg)
             {
                 //super.handleMessage(msg);
                 //Winner check
-                if (msg.obj == "W1" || msg.obj == "W2")
+                if (msg.obj == "W1")
                 {
-                    worker1.quit();
-                    worker2.quit();
-                    if (msg.obj == "W1")
-                    { p1Text.setText("Player 1 wins!");}
-                    else
-                    { p2Text.setText("Player 2 wins!");}
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            worker1.quit();
+                            worker2.quit();
+                                p1Text.setText("Player 1 wins!");
+                        }
+                    });
+
                 }
                 //Near miss check
-                else if (msg.obj == "1NM" || msg.obj == "2NM")
+                else if (msg.obj == "1NM")
                 {
-                    if (msg.obj == "1NM")
-                    {
-                        p1Text.setText("Near miss!");
-                        images[msg.arg1].setImageResource(R.drawable.p1guess);
-                    }
-                    else
-                    {
-                        p2Text.setText("Near miss!");
-                        images[msg.arg1].setImageResource(R.drawable.p2guess);
-                    }
+                    final int arg1 = msg.arg1;
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            p1Text.setText("Near miss!");
+                            images[arg1].setImageResource(R.drawable.p1guess);
+                        }
+                    });
                 }
                 //Close guess check
-                else if(msg.obj == "1CG" || msg.obj == "2CG")
+                else if(msg.obj == "1CG")
                 {
-                    if (msg.obj == "W1")
-                    {
-                        p1Text.setText("Close guess!");
-                        images[msg.arg1].setImageResource(R.drawable.p1guess);
-                    }
-                    else
-                    {
-                        p2Text.setText("Close guess!");
-                        images[msg.arg1].setImageResource(R.drawable.p2guess);
-                    }
+                    final int arg1 = msg.arg1;
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            p1Text.setText("Close guess!");
+                            images[arg1].setImageResource(R.drawable.p1guess);
+                        }
+                    });
                 }
                 //Complete miss check
-                else if (msg.obj == "1CM" || msg.obj == "2CM")
+                else if (msg.obj == "1CM")
                 {
-                    if (msg.obj == "1CM")
-                    {
-                        p1Text.setText("Complete miss!");
-                        images[msg.arg1].setImageResource(R.drawable.p1guess);
-                    }
-                    else
-                    {
-                        p2Text.setText("Complete miss!");
-                        images[msg.arg1].setImageResource(R.drawable.p2guess);
-                    }
+                    final int arg1 = msg.arg1;
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            p1Text.setText("Complete miss!");
+                            images[arg1].setImageResource(R.drawable.p1guess);
+                        }
+                    });
                 }
                 //Disaster check
-                else if(msg.obj == "1D" || msg.obj == "2D")
+                else if(msg.obj == "1D")
                 {
-                    if (msg.obj == "W1")
-                    { p1Text.setText("Disaster! Already guessed");}
-                    else
-                    { p2Text.setText("Disaster! Already guessed");}
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            p1Text.setText("Disaster! Already guessed");
+                        }
+                    });
                 }
             }
         };
+        final Handler h2 = new Handler(l2)
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                //super.handleMessage(msg);
+                //Winner check
+                if (msg.obj == "W2")
+                {
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            worker1.quit();
+                            worker2.quit();
+                            p2Text.setText("Player 2 wins!");
+                        }
+                    });
+                }
+                //Near miss check
+                else if (msg.obj == "2NM")
+                {
+                    final int arg1 = msg.arg1;
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            p2Text.setText("Near miss!");
+                            images[arg1].setImageResource(R.drawable.p2guess);
+                        }
+                    });
+                }
+                //Close guess check
+                else if(msg.obj == "2CG")
+                {
+                    final int arg1 = msg.arg1;
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            p2Text.setText("Close guess!");
+                            images[arg1].setImageResource(R.drawable.p2guess);
+                        }
+                    });
+                }
+                //Complete miss check
+                else if (msg.obj == "2CM")
+                {
+                    final int arg1 = msg.arg1;
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            p2Text.setText("Complete miss!");
+                            images[arg1].setImageResource(R.drawable.p2guess);
+                        }
+                    });
+                }
+                //Disaster check
+                else if(msg.obj == "2D")
+                {
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            p2Text.setText("Disaster! Already guessed");
+                        }
+                    });
+                }
+            }
+        };
+//        final Handler handler = new Handler(Looper.getMainLooper())
+//        {
+//            @Override
+//            public void handleMessage(Message msg)
+//            {
+//                //super.handleMessage(msg);
+//                //Winner check
+//                if (msg.obj == "W1" || msg.obj == "W2")
+//                {
+//                    worker1.quit();
+//                    worker2.quit();
+//                    if (msg.obj == "W1")
+//                    { p1Text.setText("Player 1 wins!");}
+//                    else
+//                    { p2Text.setText("Player 2 wins!");}
+//                }
+//                //Near miss check
+//                else if (msg.obj == "1NM" || msg.obj == "2NM")
+//                {
+//                    if (msg.obj == "1NM")
+//                    {
+//                        p1Text.setText("Near miss!");
+//                        images[msg.arg1].setImageResource(R.drawable.p1guess);
+//                    }
+//                    else
+//                    {
+//                        p2Text.setText("Near miss!");
+//                        images[msg.arg1].setImageResource(R.drawable.p2guess);
+//                    }
+//                }
+//                //Close guess check
+//                else if(msg.obj == "1CG" || msg.obj == "2CG")
+//                {
+//                    if (msg.obj == "W1")
+//                    {
+//                        p1Text.setText("Close guess!");
+//                        images[msg.arg1].setImageResource(R.drawable.p1guess);
+//                    }
+//                    else
+//                    {
+//                        p2Text.setText("Close guess!");
+//                        images[msg.arg1].setImageResource(R.drawable.p2guess);
+//                    }
+//                }
+//                //Complete miss check
+//                else if (msg.obj == "1CM" || msg.obj == "2CM")
+//                {
+//                    if (msg.obj == "1CM")
+//                    {
+//                        p1Text.setText("Complete miss!");
+//                        images[msg.arg1].setImageResource(R.drawable.p1guess);
+//                    }
+//                    else
+//                    {
+//                        p2Text.setText("Complete miss!");
+//                        images[msg.arg1].setImageResource(R.drawable.p2guess);
+//                    }
+//                }
+//                //Disaster check
+//                else if(msg.obj == "1D" || msg.obj == "2D")
+//                {
+//                    if (msg.obj == "W1")
+//                    { p1Text.setText("Disaster! Already guessed");}
+//                    else
+//                    { p2Text.setText("Disaster! Already guessed");}
+//                }
+//            }
+//        };
         Button startButton = findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //                HandlerThread t1 = new HandlerThread("Thread One");
-            //                HandlerThread t2 = new HandlerThread("Thread 2");
-            //                t1.start();
-            //                t2.start();
-            //                Looper l1 = t1.getLooper();
-            //                Looper l2 = t2.getLooper();
-            //                Handler h1 = new Handler(l1);
-            //                Handler h2 = new Handler(l2);
 
-            Looper l1 = worker1.getLooper();
                 //First thread runs a linear search
-                worker1.execute(new Runnable() {
+                h1.post(new Runnable() {
                     @Override
                     public void run() {
                         Random rand = new Random();
@@ -293,16 +424,26 @@ public class ThreadVsThread extends AppCompatActivity {
                         if (guesses.contains(guess1)) {
                             Message msg = new Message();
                             msg.obj = "1D";
-                            handler.sendMessage(msg);
+                            h1.sendMessage(msg);
                         }
                         else {
 
                             guesses.add(guess1);
 
                             if (guess1 == solution) {
-                                Message msg = new Message();
+                                final Message msg = new Message();
                                 msg.obj = "W1";
-                                handler.sendMessage(msg);
+                                h1.sendMessage(msg);
+
+                                mainHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        worker1.quit();
+                                        worker2.quit();
+                                        if (msg.obj == "W1")
+                                            p1Text.setText("Player 1 wins!");
+                                    }
+                                });
                             }
                             //If we're in the middle of the grid
                             if (guess1 >= 22 && guess1 <= 77) {
@@ -310,19 +451,26 @@ public class ThreadVsThread extends AppCompatActivity {
                                     Message msg = new Message();
                                     msg.obj = "1NM";
                                     msg.arg1 = guess1;
-                                    handler.sendMessage(msg);
+                                    h1.sendMessage(msg);
                                 }
                                 if (Math.abs(guess1 - solution) < 23) {
                                     Message msg = new Message();
                                     msg.obj = "2CG";
                                     msg.arg2 = guess1;
-                                    handler.sendMessage(msg);
+                                    h1.sendMessage(msg);
                                 }
+                            }
+                            else
+                            {
+                                Message msg = new Message();
+                                msg.obj = "1CM";
+                                msg.arg2 = guess1;
+                                h1.sendMessage(msg);
                             }
                             //When on the boundaries of the grid
 
                             try {
-                                Thread.sleep(500);
+                                Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -332,13 +480,13 @@ public class ThreadVsThread extends AppCompatActivity {
                 });
 
                 //Second thread runs random search
-                worker2.execute(new Runnable() {
+                h2.post(new Runnable() {
                     @Override
                     public void run() {
 
                         //Pause the thread for move turns
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -346,7 +494,7 @@ public class ThreadVsThread extends AppCompatActivity {
                         if (guesses.contains(guess2)) {
                             Message msg = new Message();
                             msg.obj = "2D";
-                            handler.sendMessage(msg);
+                            h2.sendMessage(msg);
                         }
                         else
                         {
@@ -356,7 +504,7 @@ public class ThreadVsThread extends AppCompatActivity {
                             if (guess2 == solution) {
                                 Message msg = new Message();
                                 msg.obj = "W2";
-                                handler.sendMessage(msg);
+                                h2.sendMessage(msg);
                             }
                             //If we're in the middle of the grid
                             if (guess1 >= 22 && guess1 <= 77) {
@@ -364,18 +512,26 @@ public class ThreadVsThread extends AppCompatActivity {
                                     Message msg = new Message();
                                     msg.obj = "2NM";
                                     msg.arg1 = guess2;
-                                    handler.sendMessage(msg);
+                                    h2.sendMessage(msg);
                                 }
                                 if (Math.abs(guess2 - solution) < 23) {
                                     Message msg = new Message();
                                     msg.obj = "2CG";
                                     msg.arg2 = guess2;
-                                    handler.sendMessage(msg);
+                                    h2.sendMessage(msg);
                                 }
+
+                            }
+                            else
+                            {
+                                Message msg = new Message();
+                                msg.obj = "2CM";
+                                msg.arg2 = guess1;
+                                h2.sendMessage(msg);
                             }
                             guess2++;
                             try {
-                                Thread.sleep(500);
+                                Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }

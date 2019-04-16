@@ -1,5 +1,4 @@
 package com.example.project4;
-import android.content.pm.PackageInfo;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -9,17 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Random;
 
-
-public class ThreadVsThread extends AppCompatActivity {
+public class PlayerVPlayer extends AppCompatActivity {
 
     private HandlerThread worker1 = new HandlerThread("Thread1");
     private HandlerThread worker2 = new HandlerThread("Thread2");
@@ -34,7 +27,7 @@ public class ThreadVsThread extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thread_vs_thread);
+        setContentView(R.layout.activity_player_vplayer);
 
         final TextView p1Text = findViewById(R.id.p1Text);
         final TextView p2Text = findViewById(R.id.p2Text);
@@ -417,18 +410,18 @@ public class ThreadVsThread extends AppCompatActivity {
                         msg.arg1 = guess1;
                         h1.sendMessage(msg);
                     }
-                    else if (oneAway.contains(guess1))
+                    else if (twoAway.contains(guess1))
                     {
                         Message msg = new Message();
-                        msg.obj = "2CG";
-                        msg.arg2 = guess1;
+                        msg.obj = "1CG";
+                        msg.arg1 = guess1;
                         h1.sendMessage(msg);
                     }
                     else
                     {
                         Message msg = new Message();
                         msg.obj = "1CM";
-                        msg.arg2 = guess1;
+                        msg.arg1 = guess1;
                         h1.sendMessage(msg);
 
                         //When on the boundaries of the grid
@@ -438,7 +431,6 @@ public class ThreadVsThread extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
         };
@@ -453,7 +445,6 @@ public class ThreadVsThread extends AppCompatActivity {
                 }
                 else
                 {
-
                     guesses.add(guess2);
 
                     if (guess2 == solution) {
@@ -470,13 +461,13 @@ public class ThreadVsThread extends AppCompatActivity {
                     else if (twoAway.contains(guess2)) {
                         Message msg = new Message();
                         msg.obj = "2CG";
-                        msg.arg2 = guess2;
+                        msg.arg1 = guess2;
                         h2.sendMessage(msg);
                     }
                     else {
                         Message msg = new Message();
                         msg.obj = "2CM";
-                        msg.arg2 = guess1;
+                        msg.arg1 = guess2;
                         h2.sendMessage(msg);
                     }
                     guess2++;
@@ -485,15 +476,24 @@ public class ThreadVsThread extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
         };
-        Button startButton = findViewById(R.id.startButton);
-        startButton.setOnClickListener(new View.OnClickListener() {
+
+        Button sButton = (Button) findViewById(R.id.moveButton);
+        sButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (flag)
+                {
                     h1.post(t1Runnable);
+                    flag = false;
+                }
+                else
+                {
+                    h2.post(t2Runnable);
+                    flag = true;
+                }
             }
         });
     }

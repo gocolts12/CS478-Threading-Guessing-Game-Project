@@ -14,11 +14,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button threadVsThreadButton = (Button) findViewById(R.id.ThreadVsThreadButton);
+        Button pvpButton = (Button) findViewById(R.id.PlayerVsPlayerButton);
 
         threadVsThreadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, ThreadVsThread.class);
+                startActivity(i);
+            }
+        });
+
+        pvpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, PlayerVPlayer.class);
                 startActivity(i);
             }
         });
